@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>kaohe</title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/layui.mobile.css">
+    <!-- 图标库css外链 -->
+
+    <!-- 引入 Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <!-- 包括所有已编译的插件 -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/cookie.js"></script>
+    <script>
+         
+         if(!getCookie('email')){
+             alert('您未登陆！')
+             location.href="login.html"
+         }
+
+    </script>
+</head>
+
+<body>
+    <div id="all">
+        <!-- 头部 -->
+        <div class="top">
+        </div>
+        <!-- 左边导航条60px-->
+        <div class="nav-left">
+            <div class="nav-left-logo"></div>
+            <ul class="nav-left-ul ">
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-home"><cite>主页</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="layui-icon layui-icon-component"><cite>组件</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-template"><cite>页面</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-app"><cite>应用</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-senior"><cite>高级</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-user"><cite>用户</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-set"><cite>设置</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-auz"><cite>授权</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 左边导航条220px -->
+        <div class="panel-group nav-left1" id="accordion">
+            
+        </div>
+        <div class="container">
+            
+        </div>
+    </div>
+</body>
+
+</html>

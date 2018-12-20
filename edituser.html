@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>添加管理员</title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/layui.mobile.css">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.css">
+    <!-- 包括所有已编译的插件 -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrapValidator.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/zh_CN.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/mavatar.js"></script>
+    <style type="text/css">
+    .page-header h2 {
+        text-indent: 7em;
+        color: #123456;
+    }
+
+    .sex {
+        padding-top: 7px;
+    }
+
+    .webuploader-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .upload-ul li {
+        position: relative;
+        float: left;
+        display: inline-block;
+        width: 120px;
+        height: 90px;
+        margin: 0 10px 10px 0;
+        padding: 0;
+        border: 0;
+        cursor: pointer;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .webuploader-pick {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        height: 100%;
+    }
+
+    .upload-pick {
+        background: url(img/upload-bj.png) no-repeat 0 0 !important;
+    }
+
+    .upload-pick:hover {
+        background: url(img/upload-bj.png) no-repeat 0 -90px !important;
+    }
+
+    .webuploader-element-invisible {
+        opacity: 0;
+        width: 120px;
+        height: 90px;
+        clip: rect(1px 1px 1px 1px);
+        cursor: pointer;
+    }
+
+    .diyBar {
+        display: none !important;
+    }
+
+    .upload-btn {
+        display: inline-block;
+        padding: 10px 50px;
+        font: 16px/20px 'Microsoft YaHei';
+        background: rgba(10, 168, 241, .7);
+        color: #fff;
+        border-radius: 5px;
+    }
+
+    .upload-btn:hover {
+        background: #0aa8f1;
+        color: #fff;
+    }
+
+    .Mavatar-wrapper {
+        background-color: #eee !important;
+    }
+
+    #avatar {
+        border: 1px solid #eee;
+    }
+
+    .control-label {
+        font-size: 16px;
+        color: #abcdef;
+    }
+
+    .sex {
+        color: pink;
+        /*font-weight: 600;*/
+        font-size: 15px;
+    }
+
+    .sex input {
+        margin: 0 10px;
+    }
+    .level {
+        color: pink;
+        /*font-weight: 600;*/
+        font-size: 15px;
+    }
+    .level input {
+        margin: 0 10px;
+    }
+    .password {
+        color: #a94442;
+    }
+    .sex,
+    .level {
+        padding-top: 5px;
+    }
+    #upload_file {
+        margin-bottom: 15px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="all">
+        <!-- 头部 -->
+        <div class="top">
+        </div>
+        <!-- 左边导航条60px-->
+        <div class="nav-left">
+            <div class="nav-left-logo"></div>
+            <ul class="nav-left-ul ">
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-home"><cite>主页</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="layui-icon layui-icon-component"><cite>组件</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-template"><cite>页面</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-app"><cite>应用</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-senior"><cite>高级</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-user"><cite>用户</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-set"><cite>设置</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-auz"><cite>授权</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 左边导航条220px -->
+        <div class="panel-group nav-left1" id="accordion">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="page-header">
+                        <h2>修改管理员</h2>
+                    </div>
+                    <form id="defaultForm" method="post" action="api/edituser.php" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">用户头像</label>
+                            <div class="col-lg-5">
+                                <input type="file" id="upload_file" id="upimage" accept="image/*" filepath.value='111'>
+                                <input type="hidden" id="base64_output" name="UserAvatar" value="" />
+                                <img src="" id="imgreader" width="100" height="100" alt="" style="display: none">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">用户名</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="username" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Email address</label>
+                            <div class="col-lg-5">
+                                <input type="text" disabled class="form-control" name="email" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">初始密码</label>
+                            <div class="col-lg-5 password">
+                                <input type="password" class="form-control" name="password" />密码不修改请留空!
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="col-lg-3 control-label">确认密码</label>
+                            <div class="col-lg-5">
+                                <input type="password" class="form-control" name="confirmPassword" data-bv-identical="true" data-bv-identical-field="password" data-bv-identical-message="密码不一致，请从新输入" data-bv-different="true" data-bv-different-field="username" data-bv-different-message="密码不能与用户名一样" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">qq</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="qq" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">说明</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="info" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">性别</label>
+                            <div class="col-lg-5 sex">
+                                <input type="radio" style="display: inline;" name="sex" value="1" /> 男
+                                <input type="radio" style="display: inline;" name="sex" value="0" /> 女
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">身份</label>
+                            <div class="col-lg-5 level">
+                                <input type="radio" style="display: inline;" name="level" value="1" />
+                                普通会员
+                                <input type="radio" style="display: inline;" name="level" value="0" /> 管理员
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <input type="hidden" id="userid" name="userid">
+                                <input type="hidden" id="send" name="send" value="1">
+                                <button type="submit" class="btn btn-primary" id="success">修改管理员</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    function GetHttpString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+    function stringToobject(data) {
+        var jsonData
+        if (typeof data === 'string') {
+            jsonData = $.parseJSON(data);
+        } else if (typeof data === 'object') {
+            jsonData = data
+        }
+        return jsonData
+    }
+
+    $.get('api/getusers.php', {
+       userid:GetHttpString('userid')
+    },function(data) {
+      var jsonData = stringToobject(data);
+      if(jsonData.valid){
+        var users = jsonData.users[0];
+        console.log(users)
+        $('#base64_output').val(users.userface);
+         $('#imgreader').attr('src',users.userface)
+         $('#imgreader').show()
+         $('[name="username"]').val(users.username)
+         $('[name="email"]').val(users.email)
+         $('[name="password"]').val(users.password)
+         $('[name="qq"]').val(users.qq)
+         $('[name="info"]').val(users.info)
+         $('#userid').val(users.id)
+
+         if(users.sex==1){
+             $('input[value=1]').attr('checked','checked')
+         }else if(users.sex==0){
+             $('input[value=0]').attr('checked','checked')
+         }
+
+         if(users.level==1){
+             $('input[value=1]').attr('checked','checked')
+         }else if(users.level==0){
+             $('input[value=0]').attr('checked','checked')
+         }
+
+       }else{
+          alert(jsonData.message);
+       }
+    })
+
+    $("#upload_file").on('change',function(){
+      var file = $('#upload_file')[0].files[0];
+      reader = new FileReader();  //本地预览
+      reader.onload = function(){
+          $('#base64_output').val(reader.result);
+           $('#imgreader').attr('src',reader.result);
+           $('#imgreader').show();
+      }
+      reader.readAsDataURL(file);    //Base64
+    })
+
+
+    var sex;
+    $('[name="sex"]').on('click', function() {
+        sex = $(this).val();
+        // console.log(sex);
+    })
+    $('#defaultForm')
+        .bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    message: '用户名不合法',
+                    validators: {
+                        notEmpty: {
+                            message: '用户名不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: '用户名长度必须为6到30'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: '用户名必须以字母数字或者下划线点开头,不能有特殊字符'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: '邮箱不能为空'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/,
+                            message: '邮箱不合法'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        stringLength: {
+                            min: 6,
+                            max: 18,
+                            message: '密码长度6到18位'
+                        }
+                    }
+                },
+                qq: {
+                    validators: {
+                        notEmpty: {
+                            message: 'qq不能为空'
+                        },
+                        regexp: {
+                            regexp: /^[1-9][0-9]{5,11}$/,
+                            message: 'QQ号必须为数字，长度在6到12位'
+                        }
+                    }
+                },
+                info: {
+                    validators: {
+                        notEmpty: {
+                            message: '描述不能为空'
+                        }
+                    }
+                }
+            }
+        }).on('success.form.bv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), {
+                send: 1,
+                UserAvatar: $('[name="UserAvatar"]').val(),
+                username: $('[name="username"]').val(),
+                email: $('[name="email"]').val(),
+                password: $('[name="password"]').val(),
+                qq: $('[name="qq"]').val(),
+                info: $('[name="info"]').val(),
+                sex: sex,
+                level: 0
+            }, function(data) {
+                var jsonData = stringToobject(data);
+                console.log(data);
+                // $('#success').html(jsonData.message);
+                alert('修改管理员成功!')
+                var timer = setTimeout(function () {
+                    location.href = "userlist.html";
+                }, 2000)
+            });
+        });
+    </script>
+</body>
+
+</html>

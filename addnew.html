@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>添加新闻</title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/layui.mobile.css">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <!-- 包括所有已编译的插件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.css">
+    <!-- <link rel="stylesheet" type="text/css" href=""> -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/index.js"></script>
+    <script type="text/javascript" src="js/cookie.js"></script>
+    <link rel="stylesheet" href="kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" href="kindeditor/plugins/code/prettify.css" />
+    <script charset="utf-8" src="kindeditor/kindeditor.js"></script>
+    <script charset="utf-8" src="kindeditor/lang/zh-CN.js"></script>
+    <script charset="utf-8" src="kindeditor/plugins/code/prettify.js"></script>
+    <style type="text/css">
+    .col-lg-2 {
+        padding-left: 0;
+    }
+
+    .col-lg-12 {
+        padding-left: 0;
+    }
+
+    .form-group {
+        overflow: hidden;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="all">
+        <!-- 头部 -->
+        <div class="top">
+        </div>
+        <!-- 左边导航条60px-->
+        <div class="nav-left">
+            <div class="nav-left-logo"></div>
+            <ul class="nav-left-ul ">
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-home"><cite>主页</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="layui-icon layui-icon-component"><cite>组件</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-template"><cite>页面</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-app"><cite>应用</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-senior"><cite>高级</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-user"><cite>用户</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-set"><cite>设置</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-auz"><cite>授权</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 左边导航条220px -->
+        <div class="panel-group nav-left1" id="accordion">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="page-header">
+                        <h2>添加新闻</h2>
+                    </div>
+                    <form name="example" id="sub">
+                        <div class="form-group">
+                            <!-- <div class="col-lg-4"></div> -->
+                            <div class="col-lg-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">标题</div>
+                                    <input type="text" class="form-control" name="title" placeholder="新闻标题" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-2">
+                                <select class="form-control" name="option">
+                                    <option>社会</option>
+                                    <option>娱乐</option>
+                                    <option>教育</option>
+                                    <option>体育</option>
+                                    <option>科技</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-10">
+                                <input type="" class="form-control" name="info" placeholder="新闻简介">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <input type="text" id="url" value="" class="form-control" placeholder="请点击下面按钮选择图片，该文本显示的是图片路径" name="img"/>
+                                <input type="button" id="image" value="选择图片" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="txt" style="width:716px;height:200px;visibility:hidden;" clas="form-control"></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <div class="col-lg-12">
+                                 <input type="button" name="button" value="提交内容" class="form-control" />
+                            </div>
+                        </div>     
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var editor1;
+    KindEditor.ready(function(K) {
+            editor1 = K.create('textarea[name="txt"]', {
+            cssPath: 'kindeditor/plugins/code/prettify.css',
+            uploadJson: 'kindeditor/php/upload_json.php',
+            fileManagerJson: 'kindeditor/php/file_manager_json.php',
+            allowFileManager: true,
+            afterCreate: function() {
+                var self = this;
+                K.ctrl(document, 13, function() {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function() {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+            }
+            // console.log(editor1.sync());
+        });
+        prettyPrint();
+    });
+        KindEditor.ready(function(K) {
+                var editor = K.editor({
+                    allowFileManager : true
+                });
+                K('#image').click(function() {
+                    editor.loadPlugin('image', function() {
+                        editor.plugin.imageDialog({
+                            showRemote : false,
+                            imageUrl : K('#url').val(),
+                            clickFn : function(url, title, width, height, border, align) {
+                                K('#url').val(url);
+                                editor.hideDialog();
+                            }
+                        });
+                    });
+                });
+            });     
+
+        $('[name="button"]').click(function (e) {
+            $.post('api/addnew.php', $('#sub').serialize() + editor1.html(), function (data) {
+                // console.log( $('#sub').serialize() );
+                var json = JSON.parse(data);
+                console.log(json);
+                if (json.valid) {
+                    alert('添加新闻成功');
+                } else {
+                    alert('添加新闻失败');
+                }
+            })
+        })  
+    </script>
+</body>
+
+</html>

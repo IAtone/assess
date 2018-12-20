@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理员列表</title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/layui.mobile.css">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.css">
+    <!-- 包括所有已编译的插件 -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrapValidator.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/zh_CN.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/mavatar.js"></script>
+    <style type="text/css">
+    caption {
+        font-size: 30px;
+    }
+
+    button {
+        outline: none;
+    }
+
+    .row {
+        padding-left: 30px;
+    }
+    .alert {
+    	margin-top: 30px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="all">
+        <!-- 头部 -->
+        <div class="top">
+        </div>
+        <!-- 左边导航条60px-->
+        <div class="nav-left">
+            <div class="nav-left-logo"></div>
+            <ul class="nav-left-ul ">
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-home"><cite>主页</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="layui-icon layui-icon-component"><cite>组件</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-template"><cite>页面</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-app"><cite>应用</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-senior"><cite>高级</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-user"><cite>用户</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-set"><cite>设置</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="layui-icon layui-icon-auz"><cite>授权</cite></i>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 左边导航条220px -->
+        <div class="panel-group nav-left1" id="accordion">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" id="success">
+                    <table class="table table-condensed">
+                        <caption>管理员列表</caption>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>用户名</th>
+                                <th>邮箱</th>
+                                <th>性别</th>
+                                <th>注册时间</th>
+                                <th>QQ</th>
+                                <th>身份</th>
+                                <th>描述</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="des">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    	var id = getCookie('userid');
+    	console.log(id);
+	    function stringToobject(data) {
+	        var jsonData
+	        if (typeof data === 'string') {
+	            jsonData = $.parseJSON(data);
+	        } else if (typeof data === 'object') {
+	            jsonData = data
+	        }
+	        return jsonData
+	    }
+	    $(document).keydown(function(event) {
+	        if (event.altKey && event.ctrlKey) {
+	            if ($('#success').children('.alert').length === 0) {
+	                $('#success').prepend($('<div class="alert alert-danger" id="delete">请注意，您正在准备执行删除操作</div>'));
+	                $('#success').children('.alert').fadeOut(2500, function() {
+	                $('#success').children('.alert').remove()
+	            	})
+	            }
+	        } else if (!event.altKey || !event.ctrlKey) {
+	            $('#success').children('.alert').fadeOut(2500, function() {
+	                $('#success').children('.alert').remove()
+	            })
+	        }
+	    });
+	    $.ajax({
+	        type: 'get',
+	        url: 'api/getusers.php',
+	        success: function(data) {
+	            var jsonData = stringToobject(data);
+	            var con;
+	            if (jsonData.valid) {
+	                if (jsonData.users != 'null') {
+	                    $.each(jsonData.users, function(index, value) {
+	                        var sex = value['sex'] == '1' ? '男' : '女';
+	                        var level = value['level'] == '0' ? '管理员' : '普通会员';
+	                        con = `<tr><td class="userid">${value['id']}</td>
+		    				<td>${value['username']}</td>
+		    				<td>${value['email']}</td>
+		    				<td>${sex}</td>
+		    				<td>${value['regitsterTime']}</td>
+		    				<td>${value['qq']}</td>
+		    				<td>${level}</td>
+		    				<td>${value['info']}</td>
+		    				<td><button type="button" class="btn btn-info btn-xs delete">删除</button>
+								<button type="button" class="btn btn-success btn-xs edit">编辑</button>
+		    				</td>
+		    				</tr>`;
+		    				$('#des').prepend(con);
+	                    })
+	                } else {
+	                    con = `<tr><td colspan="7">当前数据为空</td></tr>`
+	                    $('#des').html(con);
+	                }
+	            } else {
+	                con = `<tr><td colspan="7">数据获取失败</td></tr>`;
+	                $('#des').html(con);
+	            }
+
+	        }
+	    })
+	    $('#des').on('click', '.btn', function(evt) {
+	    	var event = evt || window.event;
+	        var userid = $(this).parents('tr').children('.userid').text();
+	        var stralert = $('<div class="alert alert-success"></div>');
+	        if ($(event.currentTarget).html() === '删除') {
+		        if (event.altKey && event.ctrlKey) {
+		            // $('#success').prepend($(stralert).html('请注意，您正在准备执行删除操作'));
+		            $.get('api/deleteusers.php', {
+		                userid: userid
+		            }, function(data) {
+		                // stringToobject在index.js文件中
+		                var json = stringToobject(data);
+		                $(event.currentTarget).parents('tr').remove();
+		                $('#success').prepend($(stralert).html(json.message));
+		            })
+		        } else {
+		            $('#success').prepend($(stralert).html('删除失败，请同时按下键盘 <span class="btn btn-sm btn-info">alt</span><span class="btn btn-sm btn-success">ctrl</span> 键'));
+		        }
+		        $('#success').children('.alert').fadeOut(2500, function() {
+		            $('#success').children('.alert').remove();
+		        });
+		    } else if ($(event.currentTarget).html() === '编辑') {
+                 location.href="edituser.html?userid=" + userid;
+            }
+	    })
+    </script>
+</body>
+
+</html>

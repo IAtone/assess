@@ -1,0 +1,175 @@
+/* 顶部 */
+.flag {
+    display: inline-block;
+    height: .4rem;
+    width: .96rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #6dbfff;
+    color: #fff;
+    padding: .02rem .04rem .04rem .4rem;
+    font-size: .22rem;
+    line-height: .36rem;
+    position: relative;
+    border-radius: .32rem;
+    margin: .24rem .4rem 0 0;
+}
+
+.circle {
+    display: inline-block;
+    height: .32rem;
+    width: .32rem;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    left: .04rem;
+    right: auto;
+    top: .04rem;
+}
+
+.flag span:nth-of-type(2) {
+    display: none;
+}
+
+.active {
+    background: #0074d0;
+}
+
+.active .circle {
+    right: .04rem;
+    left: auto;
+}
+
+.active span:nth-of-type(1) {
+    display: none;
+}
+
+.active span:nth-of-type(2) {
+    display: inline-block;
+    margin-left: -0.3rem;
+}
+
+/* 头部导航栏 */
+
+header section {
+    padding: 0 0 .18rem;
+}
+
+.header_nav {
+    display: flex;
+    margin-top: .16rem;
+}
+
+.header_nav a {
+    display: block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1 1;
+    width: 0;
+    font-size: .34rem;
+    height: .5rem;
+    color: #fff;
+    white-space: nowrap;
+    position: relative;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.header_nav a span {
+    line-height: .5rem;
+    vertical-align: middle;
+    font-size: .34rem;
+    line-height: 0;
+    height: .5rem;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.header_nav .arrow {
+    position: relative;
+}
+
+.header_nav .arrow i {
+    position: absolute;
+    right: 0;
+    top: 0.12rem;
+    display: inline-block;
+    width: 0.34rem;
+    height: 0.34rem;
+    padding-left: .1rem;
+    background: url(../image/arrow.png) center center no-repeat;
+    background-size: cover;
+}
+
+.lock .header_nav:nth-child(2) {
+    display: none;
+}
+
+.lock .header_nav .arrow i {
+    transform: rotate(180deg);
+}
+
+/* 主要内容区域 */
+
+.container {
+    padding: 0;
+    padding-top: .2rem;
+    margin: 0 .2rem;
+}
+
+.swiper-slide a {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+}
+
+.swiper-slide a img {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide a span {
+    position: absolute;
+    left: .25rem;
+    bottom: .25rem;
+    display: inline-block;
+    font-size: .32rem;
+    color: #fff;
+}
+
+.swiper-container {
+    position: relative;
+}
+
+.num {
+    position: absolute;
+    right: .25rem;
+    bottom: .25rem;
+    z-index: 2;
+    color: #fff;
+    text-align: right;
+}
+
+.num span {
+    color: #fff;
+    font-size: .25rem;
+}
+
+.num span:nth-child(1) {
+    font-size: .38rem;
+    font-weight: 600;
+}
+
+.num span:nth-child(2) {
+    margin-right: .25rem;
+}
+
+
+
+
+
+
+
+

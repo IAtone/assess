@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新浪新闻_手机新浪网</title>
+    <script src="js/rem.js"></script>
+    <!-- <script src="js/jquery-1.12.4.js"></script> -->
+    <script src="js/zepto.js"></script>
+    <link rel="stylesheet" href="css/swiper.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div id="sina">
+        <header>
+            <div class="header_top">
+                <a href="index.html" class="icon-sina fl"></a>
+                <h1 class="fl">
+                    <a href="">新闻</a>
+                </h1>
+                <a href="" class="menu fr"></a>
+                <a href="" class="flag fr">
+                    <i class="circle"></i>
+                    <span>有图</span>
+                    <span>无图</span>
+                </a>
+            </div>
+            <section>
+                <nav class="header_nav">
+                    <a href=""><span>国内</span></a>
+                    <a href=""><span>国际</span></a>
+                    <a href=""><span>捉谣记</span></a>
+                    <a href=""><span>军迷团</span></a>
+                    <a href="" class="arrow"><span>收起</span><i></i></a>
+                </nav>
+                <nav class="header_nav">
+                    <a href=""><span>视频</span></a>
+                    <a href=""><span>图片</span></a>
+                    <a href=""><span>知事</span></a>
+                    <a href=""><span>时事外参</span></a>
+                    <a href=""><span>滚动</span></a>
+                </nav>
+            </section>
+        </header>
+        <div class="container">
+            <section>
+                <div class="swiper-container swiper-container-horizontal">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="">
+                                <img src="image/1.png" alt="">
+                                <span>时间都去哪了</span>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="">
+                                <img src="image/2.png" alt="">
+                                <span>天上的星星很少</span>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="">
+                                <img src="image/3.png" alt="">
+                                <span>春秋的记忆里</span>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="">
+                                <img src="image/4.png" alt="">
+                                <span>熟陌生悉</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination swiper-pagination-fraction num">
+                        <span class="swiper-pagination-current">1</span>
+                        / <span class="swiper-pagination-total">4</span>
+                    </div>
+                </div>
+            </section>
+            <section class="content">
+            </section>
+        </div>
+    </div>
+    <script src="js/swiper.js"></script>
+    <script src="js/index.js"></script>
+    <script type="text/javascript">
+    function stringToobject(data) {
+        var jsonData
+        if (typeof data === 'string') {
+            jsonData = $.parseJSON(data);
+        } else if (typeof data === 'object') {
+            jsonData = data
+        }
+        return jsonData
+    }
+    
+    $.get('../api/getnews.php', {
+        getNews: 'all'
+    }, function(data) {
+        var jsonData = stringToobject(data);
+        // console.log(jsonData.message);
+        var con;
+        if (jsonData.valid) {
+            $.each(jsonData.message, function(index, value) {
+                console.log(value);
+                con = `<a href="news.html?id=${value['id']}">
+                    <figure>
+                        <img src="${value['img']}" alt="">
+                    </figure>
+                    <aside>
+                        <h2>${value['title']}</h2>
+                        <blockquote>
+                            <em>
+                            </em>
+                        </blockquote>
+                    </aside>
+                </a>`
+                $('.content').prepend(con);
+            })
+        }
+    })
+    </script>
+</body>
+
+</html>
